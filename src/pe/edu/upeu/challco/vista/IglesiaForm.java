@@ -6,17 +6,51 @@
 
 package pe.edu.upeu.challco.vista;
 
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import pe.edu.upeu.challco.DAO.DistritoDAO;
+import pe.edu.upeu.challco.DAO.TipoIglesiaDAO;
+import pe.edu.upeu.challco.modelo.Distrito;
+import pe.edu.upeu.challco.modelo.Tipo_Iglesia;
+
 /**
  *
  * @author alum.fial7
  */
 public class IglesiaForm extends javax.swing.JFrame {
-
+    ArrayList<Distrito> lista1 =new ArrayList();
+    ArrayList<Tipo_Iglesia> lista2 =new ArrayList();
+    DistritoDAO dAO1 = new DistritoDAO();
+    TipoIglesiaDAO dAO2 = new TipoIglesiaDAO();
+    
+    DefaultComboBoxModel<Object> modelodistrito = new DefaultComboBoxModel<>();
+    DefaultComboBoxModel<Object> modelotipo = new DefaultComboBoxModel<>();
     /**
      * Creates new form IglesiaForm
      */
     public IglesiaForm() {
         initComponents();
+        setLocationRelativeTo(null);
+        cargarDistrito();
+        cargartipoiglesia();
+    }
+    final void cargarDistrito(){
+        lista1 = dAO1.listarDistrito();
+        modelodistrito.addElement("Seleccionar Distrito");
+        cboDistrito.setModel(modelodistrito);
+        for(int i=0; i<lista1.size();i++){
+            modelodistrito.addElement(lista1.get(i).getDisc());
+        }
+        cboDistrito.setModel(modelodistrito);
+    }
+    final void cargartipoiglesia(){
+        lista2 = dAO2.listarTipoIglesia();
+        modelotipo.addElement("Seleccionar tipo Iglesia");
+        cboTI.setModel(modelotipo);
+        for(int i=0;i<lista2.size();i++){
+            modelotipo.addElement(lista2.get(i).getNomtipo());
+        }
+        cboTI.setModel(modelotipo);
     }
 
     /**
@@ -28,21 +62,89 @@ public class IglesiaForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        cboDistrito = new javax.swing.JComboBox();
+        cboTI = new javax.swing.JComboBox();
+        txtIglesia = new javax.swing.JTextField();
+        txtCuenta = new javax.swing.JTextField();
+        btnRegistrar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Distrito:");
+
+        jLabel2.setText("Tipo_Iglesia:");
+
+        jLabel3.setText("Iglesia:");
+
+        jLabel4.setText("Cuenta:");
+
+        txtIglesia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIglesiaActionPerformed(evt);
+            }
+        });
+
+        btnRegistrar.setText("REGISTRAR");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 426, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel3)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cboDistrito, 0, 88, Short.MAX_VALUE)
+                            .addComponent(cboTI, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtIglesia)
+                            .addComponent(txtCuenta)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(132, 132, 132)
+                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 314, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(cboDistrito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(cboTI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtIglesia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
+                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtIglesiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIglesiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIglesiaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -80,5 +182,14 @@ public class IglesiaForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRegistrar;
+    private javax.swing.JComboBox cboDistrito;
+    private javax.swing.JComboBox cboTI;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField txtCuenta;
+    private javax.swing.JTextField txtIglesia;
     // End of variables declaration//GEN-END:variables
 }
